@@ -121,6 +121,15 @@ class SignWindow:
 
 
 if __name__ == '__main__':
-    tk = Tk()
-    SignWindow(tk)
-    tk.mainloop()
+    try:
+        tk = Tk()
+        SignWindow(tk)
+        tk.mainloop()
+    except Exception as e:
+        time = datetime.now()
+        strtime = time.strftime("%Y%m%d-%H%M%S")
+        with open(f'{strtime}.txt', 'w') as f:
+            f.write(f'{strtime}\n\n-------------------\n\n')
+            f.write(str(e))
+    finally:
+        sql.connect.close()
